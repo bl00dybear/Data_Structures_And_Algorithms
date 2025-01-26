@@ -54,16 +54,13 @@ int bfs(const int s, const int d){
         const int x1 = path[i];
         int y = path[i+1];
         flow = min(flow, capacity[x1][x1]-flux[x1][x1]);
-
     }
     for(int i=0;i<path.size();i+=1){
         const int x1 = path[i];
         const int y = path[i+1];
         flux[x1][y] += flow;
         flux[y][x1] -=flow;
-    
     }
-
     return flow;
 
 }
