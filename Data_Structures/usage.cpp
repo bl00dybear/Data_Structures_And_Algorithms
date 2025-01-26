@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "myDataStructures.hpp"
+#include "dataStructures.hpp"
 using namespace std;
 
 int main(){
