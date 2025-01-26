@@ -11,6 +11,7 @@ int n,m;
 vector<int> graph[size];
 vector<int> inDegree;
 vector<int> result;
+bitset<size> visited;
 
 void read_dag() {
     fin >> n >>m;
@@ -23,6 +24,36 @@ void read_dag() {
     }
     cout << n << " " << m << endl;
 }
+
+void dfs(const int node) {
+    visited[node] = true;
+
+    for (const int neighbor : graph[node]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor);
+        }
+    }
+    result.push_back(node);
+}
+
+void topologicalSortDFS() {
+    for (int i = 1; i <= n; i++) {
+        visited[n + 1]= false;
+    }
+    result.clear();
+
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) {
+            dfs(i);
+        }
+    }
+    reverse(result.begin(), result.end());
+    for (const int v : result) {
+        fout << v << " ";
+    }
+    fout << endl;
+}
+
 
 void topologicalSort() {
     queue<int> q;
@@ -48,10 +79,12 @@ void topologicalSort() {
     for (const int v : result) {
         fout << v << " ";
     }
+    fout << endl;
 }
 
 int main() {
     read_dag();
     topologicalSort();
+    topologicalSortDFS();
     return 0;
 }
