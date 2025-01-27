@@ -15,7 +15,7 @@ int p[size_+1];
 
 int bfs(const int s, const int d){
     queue<int> q;
-    for (int i =1;i<=m;i+=1){
+    for (int i =1;i<=n;i+=1){
         visited[i]=false;
         p[i]=0;
     }
@@ -35,9 +35,8 @@ int bfs(const int s, const int d){
         }
     }
 
-    if(!visited[d]){
+    if(!visited[d])
         return 0;
-    }
 
     vector<int> path;
     int x = d;
@@ -50,12 +49,12 @@ int bfs(const int s, const int d){
     //reverse(path.begin(),path.end());
     ranges::reverse(path);
     int flow=1e9;
-    for(int i = 0; i<path.size();i+=1){
+    for(int i = 0; i<path.size()-1;i+=1){
         const int x1 = path[i];
         int y = path[i+1];
-        flow = min(flow, capacity[x1][x1]-flux[x1][x1]);
+        flow = min(flow, capacity[x1][y]-flux[x1][y]);
     }
-    for(int i=0;i<path.size();i+=1){
+    for(int i=0;i<path.size()-1;i+=1){
         const int x1 = path[i];
         const int y = path[i+1];
         flux[x1][y] += flow;
